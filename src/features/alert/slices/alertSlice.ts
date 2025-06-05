@@ -4,7 +4,7 @@ import { uid } from '@/utils/uid'
 interface Alert {
   id: string | null;
   message: string;
-  timeout: number;
+  autoClose: number;
 }
 
 interface AlertState {

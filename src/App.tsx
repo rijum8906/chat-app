@@ -18,7 +18,7 @@ function App() {
   return(
     <>
       App
-      <button onClick={onClick}>Show Alert</button>
+      <button className="px-5 py-2 bg-violet-600 text-white m-10 rounded-md" onClick={onClick}>Show Alert</button>
       <AlertContainer />
     </>
   )

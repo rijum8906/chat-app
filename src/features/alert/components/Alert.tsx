@@ -1,4 +1,5 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faExclamationCircle, faExclamationTriangle, faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,12 +9,17 @@ interface AlertProps {
   type: AlertType;
   message: ReactNode;
   dismissible?: boolean;
+  autoClose?: number;
+  onClose?: () => void; 
 }
 
-const Alert: React.FC<AlertProps> = ({ type, message, dismissible = false }) => {
+const Alert: React.FC<AlertProps> = ({ type, message, dismissible = false, autoClose = 3000, onClose = () => {} }) => {
   const [isVisible, setIsVisible] = useState(true);
 
-  const handleClose = () => setIsVisible(false);
+  const handleClose = () => {
+    setIsVisible(false);
+    onClose();
+  };
 
   const alertClasses = {
     success: "bg-green-100 text-green-800",
@@ -29,21 +35,44 @@ const Alert: React.FC<AlertProps> = ({ type, message, dismissible = false }) => 
     info: faInfoCircle,
   };
 
-  if (!isVisible) return null;
+  useEffect(() => {
+    if (autoClose) {
+      const timeout = setTimeout(() => handleClose(), autoClose);
+      return () => clearTimeout(timeout);
+    }
+  }, [autoClose]);
 
   return (
-    <div className={`p-4 rounded-md shadow-md mb-4 flex items-center ${alertClasses[type]}`} role="alert">
-      <p>{message}</p>
-      <button
-        type="button"
-        className="ml-auto text-gray-400 hover:text-gray-600 focus:outline-none"
-        onClick={handleClose}
-        aria-label="Close Alert"
-      >
-        <FontAwesomeIcon icon={faTimes} className="text-xl" />
-      </button>
-    </div>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: -15 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: -15 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className={`p-4 rounded-lg w-full mx-auto shadow-md flex justify-between items-center ${alertClasses[type]}`}
+          role="alert"
+        >
+          <div className="flex items-center">
+            <FontAwesomeIcon icon={iconMap[type]} className="text-xl mr-2" />
+            <p className="text-md font-medium">{message}</p>
+          </div>
+
+          {dismissible && (
+            <motion.button
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-gray-500 hover:text-gray-700 transition-colors"
+              onClick={handleClose}
+              aria-label="Close Alert"
+            >
+              <FontAwesomeIcon icon={faTimes} className="text-xl" />
+            </motion.button>
+          )}
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
-export default React.memo(Alert);
+export default Alert;
