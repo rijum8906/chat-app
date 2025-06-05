@@ -1,9 +1,9 @@
-import { useAppDispatch } from "@/store";
+import { useAppDispatch } from '@/store';
 import { addAlert, removeAlert, removeAllAlerts } from './../slices/alertSlice';
 
 interface AlertPayload {
   message: string;
-  type?: "success" | "error" | "warning";
+  type?: 'success' | 'error' | 'warning';
 }
 
 const useAlert = () => {

@@ -1,5 +1,5 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AuthState, User, AuthSuccessPayload } from "@/types/authTypes";
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { AuthState, User, AuthSuccessPayload } from '@/types/authTypes';
 
 const initialState: AuthState = {
   isLoading: false,
@@ -7,11 +7,11 @@ const initialState: AuthState = {
   token: null,
   isError: false,
   method: null,
-  attempts: 0
+  attempts: 0,
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     authSuccess: (state, action: PayloadAction<AuthSuccessPayload>) => {

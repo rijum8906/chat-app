@@ -2,14 +2,13 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import authReducer from '@/features/auth/slices/authSlice'
-import alertReducer from '@/features/alert/slices/alertSlice'
-
+import authReducer from '@/features/auth/slices/authSlice';
+import alertReducer from '@/features/alert/slices/alertSlice';
 
 // Root reducer where all reducers will be combined
 const rootReducer = combineReducers({
   auth: authReducer,
-  alert: alertReducer
+  alert: alertReducer,
 });
 
 // setup storage for reducers.  Whitelist should specify which reducers to persist.
@@ -30,7 +29,6 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

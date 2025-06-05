@@ -1,16 +1,22 @@
-import React, { ReactNode, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faExclamationCircle, faExclamationTriangle, faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
+import React, { ReactNode, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCheckCircle,
+  faExclamationCircle,
+  faExclamationTriangle,
+  faInfoCircle,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 
-type AlertType = "success" | "error" | "warning" | "info";
+type AlertType = 'success' | 'error' | 'warning' | 'info';
 
 interface AlertProps {
   type: AlertType;
   message: ReactNode;
   dismissible?: boolean;
   autoClose?: number;
-  onClose?: () => void; 
+  onClose?: () => void;
 }
 
 const Alert: React.FC<AlertProps> = ({ type, message, dismissible = false, autoClose = 3000, onClose = () => {} }) => {
@@ -22,10 +28,10 @@ const Alert: React.FC<AlertProps> = ({ type, message, dismissible = false, autoC
   };
 
   const alertClasses = {
-    success: "bg-green-100 text-green-800",
-    error: "bg-red-100 text-red-800",
-    warning: "bg-yellow-100 text-yellow-800",
-    info: "bg-blue-100 text-blue-800",
+    success: 'bg-green-100 text-green-800',
+    error: 'bg-red-100 text-red-800',
+    warning: 'bg-yellow-100 text-yellow-800',
+    info: 'bg-blue-100 text-blue-800',
   };
 
   const iconMap = {
@@ -49,7 +55,7 @@ const Alert: React.FC<AlertProps> = ({ type, message, dismissible = false, autoC
           initial={{ opacity: 0, scale: 0.9, y: -15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: -15 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
           className={`p-4 rounded-lg w-full mx-auto shadow-md flex justify-between items-center ${alertClasses[type]}`}
           role="alert"
         >
