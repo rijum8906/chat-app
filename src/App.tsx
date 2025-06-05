@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import { authSuccess, authFailure, logout, startLoading } from '@/features/auth/slices/authSlice';
-import AlertContainer from '@/features/alert/components/AlertContainer';
-import useAlert from '@/features/alert/hooks/useAlert';
+import { authSuccess, authFailure, logout, startLoading } from '@/features/auth';
+import {useAlert, AlertContainer} from '@/features/alert';
 
 function App() {
   const { attempts, user } = useAppSelector((state) => state.auth);
