@@ -29,7 +29,7 @@ const authSlice = createSlice({
       state.isError = true;
       state.attempts++;
     },
-    logout: (state) => {
+    signout: (state) => {
       state.isLoading = false;
       state.user = null;
       state.token = null;
@@ -42,5 +42,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { authSuccess, authFailure, logout, startLoading } = authSlice.actions;
+export const { authSuccess, authFailure, signout, startLoading } = authSlice.actions;
 export default authSlice.reducer;
