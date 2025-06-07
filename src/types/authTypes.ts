@@ -37,14 +37,13 @@ export interface SignupPayload {
   password: string;
 }
 
+  
 export interface AuthContextType {
   user: Record<string, any>;
   token: string;
-  signout: () => void;
-  passwordAuth: {
-    login: (email: string, password: string) => Promise<void>;
-    register: (email: string, password: string) => Promise<void>;
-  };
+  signOut: () => Promise<void>;
+  signInByPassword: (payload: SigninPayload, method: Method) => Promise<void>;
+  signUpByPassword: (payload: SignupPayload, method: Method) => Promise<void>;
 }
 
 export interface AuthResponse {
