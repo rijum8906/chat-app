@@ -1,9 +1,12 @@
 export interface User {
-  id: string;
+  sub: string;
   email: string;
-  role: string;
+  roles: string[];
   username: string;
-  displayName: string;
+  profile: {
+    displayName: string;
+    avatarURL: string;
+  };
 }
 
 export type Method = 'google' | 'password';
@@ -37,7 +40,6 @@ export interface SignupPayload {
   password: string;
 }
 
-  
 export interface AuthContextType {
   user: Record<string, any>;
   token: string;

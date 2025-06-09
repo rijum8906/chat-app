@@ -5,7 +5,7 @@ import { authSuccess, authFailure, signout, startLoading } from '@/features/auth
 import authApi from '@/api/authApi';
 import { useAlert } from '@/features/alert';
 
-// Creating a auth context 
+// Creating a auth context
 const AuthContext = createContext<AuthContextType | null>(null);
 
 interface AuthProviderProps {
@@ -20,28 +20,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { user, token, isLoading, attempts } = useAppSelector((state) => state.auth);
 
   // store google auth token
-  let googleOAuthRenderedButton = undefined;
-  
-  // complete authentication after getting token 
-  const completeOAuth = async (token, method) => {
+  let googleOAuthRenderedButton;
+
+  // complete authentication after getting token
+  const completeOAuth = async (token) => {
     try {
-      // send auth token to api 
-    const data = await authApi.authenticateByGoogle({ token: googleAuthToken });
+      // send auth token to api
+      const data = await authApi.authenticateByGoogle({ token });
       if (!data.success) throw new Error(data.message);
-      
-      // show res to client 
+
+      // show res to client
       showResToClient({
         message: data.message,
         data: data,
-        type: "success"
+        type: 'success',
+        method: 'google',
       });
-    } catch(error: any) {
+    } catch (error: any) {
       showResToClient({
-        message: error.response?.data?.data?.error?.message || error.message || "Something went wrong.",
-        type: "error"
+        message: error.response?.data?.data?.error?.message || error.message || 'Something went wrong.',
+        type: 'error',
       });
     }
-  }
+  };
 
   // with loading of this component initialize google auth
   useEffect(() => {
@@ -49,44 +50,59 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       window.google.accounts.id.initialize({
         client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
         callback: async (credentials: any) => {
-          await completeOAuth(credentials.credential)
+          await completeOAuth(credentials.credential);
         },
-        context: 'use'
+        context: 'use',
       });
-      console.log(googleOAuthRenderedButton)
-      if(googleOAuthRenderedButton) window.google.accounts.id.renderButton(googleOAuthRenderedButton.ele,
-      googleOAuthRenderedButton.options);
+      
+      // if the user is rendering any google auth button
+      if (googleOAuthRenderedButton)
+        window.google.accounts.id.renderButton(googleOAuthRenderedButton.ele, googleOAuthRenderedButton.options);
     }
   }, []);
 
-  // a function to show user alert 
-  const showResToClient = ({ message, data, type, method='password' }: { message: string, data?: any, type: string, method: Method }) => {
-    if (type === "success" && data) dispatch(authSuccess({
-      token: data.token,
-      method,
-      user: data.user
-    }));
+  // a function to show user alert
+  const showResToClient = ({
+    message,
+    data,
+    type,
+    method = 'password',
+  }: {
+    message: string;
+    data?: any;
+    type: string;
+    method: Method;
+  }) => {
+    if (type === 'success' && data)
+      dispatch(
+        authSuccess({
+          token: data.token,
+          method,
+          user: data.user,
+        })
+      );
 
-    if (type === "error") dispatch(authFailure());
+    if (type === 'error') dispatch(authFailure());
 
     showAlert({ message, type });
   };
 
-  // Sign In by password function 
+  // Sign In by password function
   const signInUserByPass = async (payload: SigninPayload) => {
     dispatch(startLoading());
     try {
       const data = await authApi.signInByPass(payload);
-      if (!data.success) throw new Error(data.message);
+      if (!data.success) throw new Error(data.error.message);
       showResToClient({
         message: data.message,
         data: data,
-        type: "success"
+        type: 'success',
+        method: 'password',
       });
     } catch (error: any) {
       showResToClient({
-        message: error.response?.data?.data?.error?.message || error.message || "Something went wrong.",
-        type: "error"
+        message: error.response?.data?.data?.error?.message || error.message || 'Something went wrong.',
+        type: 'error',
       });
     }
   };
@@ -100,32 +116,33 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       showResToClient({
         message: data.message,
         data: data,
-        type: "success"
+        type: 'success',
+        method: 'password',
       });
     } catch (error: any) {
       showResToClient({
-        message: error.response?.data?.data?.error?.message || error.message || "Something went wrong.",
-        type: "error"
+        message: error.response?.data?.data?.error?.message || error.message || 'Something went wrong.',
+        type: 'error',
       });
     }
   };
 
-  // Sign out user 
+  // Sign out user
   const signOutUser = async () => {
     dispatch(startLoading());
     try {
       const data = await authApi.signOut();
       showResToClient({
         message: data.message,
-        type: "success"
+        type: 'success',
       });
-      
-      // claear Google token 
+
+      // claear Google token
       setGoogleAuthToken(null);
-    } catch(error: any) {
+    } catch (error: any) {
       showResToClient({
-        message: error.response?.data?.data?.error?.message || error.message || "Something went wrong.",
-        type: "error"
+        message: error.response?.data?.data?.error?.message || error.message || 'Something went wrong.',
+        type: 'error',
       });
     }
   };
@@ -133,24 +150,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Sign in with Google (popup)
   const promptGoogleAuth = async () => {
     dispatch(startLoading());
-    
-    // Trigger google one tap login 
-  window.google.accounts.id.prompt((notification) => {
-    if(notification.g === 'skipped') showResToClient({
-      message: 'You have cancelled google signin.',
-      type: 'error'
+
+    // Trigger google one tap login
+    window.google.accounts.id.prompt((notification) => {
+      if (notification.g === 'skipped')
+        showResToClient({
+          message: 'You have cancelled google signin.',
+          type: 'error',
+        });
+      else if (notification.i !== 'credential_returned')
+        showResToClient({
+          message: 'Something went wrong.',
+          type: 'error',
+        });
     });
-    else if(notification.i !== 'credential_returned') showResToClient({
-      message: 'Something went wrong.',
-      type: 'error'
-    });
-  });
   };
-  
+
   // Sign in with google from button
   const renderGoogleAuthByButton = (ele, options = {}) => {
-    googleOAuthRenderedButton = {ele, options};
-  }
+    googleOAuthRenderedButton = { ele, options };
+  };
 
   // Memoize the context value
   const contextValue = useMemo(
@@ -161,12 +180,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       attempts,
       passwordAuth: {
         signIn: signInUserByPass,
-        signUp: signUpUserByPass
+        signUp: signUpUserByPass,
       },
       oAuth: {
         promptGoogleAuth,
         renderGoogleAuthByButton,
-      }
+      },
     }),
     [user, token, isLoading, attempts]
   );
