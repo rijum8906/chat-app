@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@/store';
-import { addAlert, removeAlert, removeAllAlerts } from './../slices/alertSlice';
+import { addAlert, removeAlert, removeAllAlerts } from './../slice/alertSlice';
 
 interface AlertPayload {
   message: string;

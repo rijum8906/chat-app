@@ -8,6 +8,7 @@ import {
   faInfoCircle,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
+import { Button } from '@/components/ui/button';
 
 type AlertType = 'success' | 'error' | 'warning' | 'info';
 

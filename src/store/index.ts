@@ -2,8 +2,8 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import authReducer from '@/features/auth/slices/authSlice';
-import alertReducer from '@/features/alert/slices/alertSlice';
+import authReducer from '@/features/auth/slice/authSlice';
+import alertReducer from '@/features/alert/slice/alertSlice';
 
 // Root reducer where all reducers will be combined
 const rootReducer = combineReducers({

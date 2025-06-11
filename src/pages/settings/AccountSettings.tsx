@@ -1,4 +1,4 @@
-const AccountSettings-Component = () => {
+const AccountSettingsComponent = () => {
   return (
     <>
       AccountSettings
@@ -6,5 +6,5 @@ const AccountSettings-Component = () => {
   )
 }
 
-export default AccountSettings-Component;
+export default AccountSettingsComponent;
 

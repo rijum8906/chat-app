@@ -1,4 +1,4 @@
-const GeneralSettings-Component = () => {
+const GeneralSettingsComponent = () => {
   return (
     <>
       GeneralSettings
@@ -6,5 +6,5 @@ const GeneralSettings-Component = () => {
   )
 }
 
-export default GeneralSettings-Component;
+export default GeneralSettingsComponent;
 

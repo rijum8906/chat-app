@@ -1,4 +1,4 @@
-const Signin-Component = () => {
+const SigninComponent = () => {
   return (
     <>
       Signin
@@ -6,5 +6,5 @@ const Signin-Component = () => {
   )
 }
 
-export default Signin-Component;
+export default SigninComponent;
 
