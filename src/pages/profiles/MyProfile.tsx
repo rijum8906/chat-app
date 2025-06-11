@@ -1,10 +1,5 @@
-const MyProfile-Component = () => {
-  return (
-    <>
-      MyProfile
-    </>
-  )
-}
+const MyProfileComponent = () => {
+  return <>MyProfile</>;
+};
 
-export default MyProfile-Component;
-
+export default MyProfileComponent;

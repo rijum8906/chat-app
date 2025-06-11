@@ -1,9 +1,5 @@
-const Loader= () => {
-  return (
-    <>
-    Loading...
-    </>
-  )
-}
+const Loader = () => {
+  return <>Loading...</>;
+};
 
-export default Loader
+export default Loader;

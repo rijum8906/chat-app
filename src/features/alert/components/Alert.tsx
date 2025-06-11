@@ -1,13 +1,7 @@
 import React, { ReactNode, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCheckCircle,
-  faExclamationCircle,
-  faExclamationTriangle,
-  faInfoCircle,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
+import { CheckCircle, XCircle, AlertTriangle, Info, X } from 'lucide-react';
+import { Alert as ShadAlert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 
 type AlertType = 'success' | 'error' | 'warning' | 'info';
@@ -28,19 +22,19 @@ const Alert: React.FC<AlertProps> = ({ type, message, dismissible = false, autoC
     onClose();
   };
 
-  const alertClasses = {
-    success: 'bg-green-100 text-green-800',
-    error: 'bg-red-100 text-red-800',
-    warning: 'bg-yellow-100 text-yellow-800',
-    info: 'bg-blue-100 text-blue-800',
+  const iconMap = {
+    success: <CheckCircle className="h-5 w-5 text-green-600 mt-1" />,
+    error: <XCircle className="h-5 w-5 text-red-600 mt-1" />,
+    warning: <AlertTriangle className="h-5 w-5 text-yellow-600 mt-1" />,
+    info: <Info className="h-5 w-5 text-blue-600 mt-1" />,
   };
 
-  const iconMap = {
-    success: faCheckCircle,
-    error: faExclamationCircle,
-    warning: faExclamationTriangle,
-    info: faInfoCircle,
-  };
+  const variantMap = {
+    success: 'success',
+    error: 'destructive',
+    warning: 'warning',
+    info: 'default',
+  } as const;
 
   useEffect(() => {
     if (autoClose) {
@@ -53,29 +47,31 @@ const Alert: React.FC<AlertProps> = ({ type, message, dismissible = false, autoC
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: -15 }}
+          initial={{ opacity: 0, scale: 0.95, y: -10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: -15 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-          className={`p-4 rounded-lg w-full mx-auto shadow-md flex justify-between items-center ${alertClasses[type]}`}
-          role="alert"
+          exit={{ opacity: 0, scale: 0.95, y: -10 }}
+          transition={{ duration: 0.2 }}
         >
-          <div className="flex items-center">
-            <FontAwesomeIcon icon={iconMap[type]} className="text-xl mr-2" />
-            <p className="text-md font-medium">{message}</p>
-          </div>
+          <ShadAlert variant={variantMap[type]} className="flex justify-between items-start gap-4 w-full">
+            <div className="flex gap-3 items-start">
+              {iconMap[type]}
+              <div>
+                <AlertTitle className="capitalize">{type}</AlertTitle>
+                <AlertDescription>{message}</AlertDescription>
+              </div>
+            </div>
 
-          {dismissible && (
-            <motion.button
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              className="text-gray-500 hover:text-gray-700 transition-colors"
-              onClick={handleClose}
-              aria-label="Close Alert"
-            >
-              <FontAwesomeIcon icon={faTimes} className="text-xl" />
-            </motion.button>
-          )}
+            {dismissible && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleClose}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            )}
+          </ShadAlert>
         </motion.div>
       )}
     </AnimatePresence>

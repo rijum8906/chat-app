@@ -1,10 +1,5 @@
-const Chat-Component = () => {
-  return (
-    <>
-      Chat
-    </>
-  )
-}
+const Chat = () => {
+  return <>Chat</>;
+};
 
-export default Chat-Component;
-
+export default Chat;

@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-// Loader 
-import Loader from '@/components/Loader';
+// Loader
+import Loader from '@/components/layout/Loader';
 
 // --- Layouts ---
 import MainLayout from '@/layouts/MainLayout';
@@ -16,14 +16,14 @@ const HomePage = lazy(() => import('@/pages/Home'));
 const NotFoundPage = lazy(() => import('@/pages/NotFound'));
 
 // Auth
-const SigninPage = lazy(() => import('@/pages/Signin'));
-const SignupPage = lazy(() => import('@/pages/Signup'));
-const ForgotPasswordPage = lazy(() => import('@/pages/ForgotPassword'));
-const ResetPasswordPage = lazy(() => import('@/pages/ResetPassword'));
-const VerifyEmailPage = lazy(() => import('@/pages/VerifyEmail'));
+const SigninPage = lazy(() => import('@/pages/auth/Signin'));
+const SignupPage = lazy(() => import('@/pages/auth/Signup'));
+const ForgotPasswordPage = lazy(() => import('@/pages/auth/ForgotPassword'));
+const ResetPasswordPage = lazy(() => import('@/pages/auth/ResetPassword'));
+const VerifyEmailPage = lazy(() => import('@/pages/auth/VerifyEmail'));
 
 // Chats
-const ChatsPage = lazy(() => import('@/pages/chats/Index'));
+const ChatsPage = lazy(() => import('@/pages/chats'));
 const ChatPage = lazy(() => import('@/pages/chats/Chat'));
 const NewChatPage = lazy(() => import('@/pages/chats/NewChat'));
 const ChatSettingsPage = lazy(() => import('@/pages/chats/ChatSettings'));
@@ -39,9 +39,9 @@ const PrivacySettingsPage = lazy(() => import('@/pages/settings/PrivacySettings'
 const NotificationSettingsPage = lazy(() => import('@/pages/settings/NotificationSettings'));
 
 // Public
-const AboutPage = lazy(() => import('@/pages/About'));
-const ContactPage = lazy(() => import('@/pages/Contact'));
-const TermsPage = lazy(() => import('@/pages/Terms'));
+const AboutPage = lazy(() => import('@/pages/public/About'));
+const ContactPage = lazy(() => import('@/pages/public/Contact'));
+const TermsPage = lazy(() => import('@/pages/public/Terms'));
 
 function AppRoutes() {
   const routes = useRoutes([

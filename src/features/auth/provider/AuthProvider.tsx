@@ -54,7 +54,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         },
         context: 'use',
       });
-      
+
       // if the user is rendering any google auth button
       if (googleOAuthRenderedButton)
         window.google.accounts.id.renderButton(googleOAuthRenderedButton.ele, googleOAuthRenderedButton.options);

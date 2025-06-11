@@ -1,10 +1,5 @@
 const GeneralSettingsComponent = () => {
-  return (
-    <>
-      GeneralSettings
-    </>
-  )
-}
+  return <>GeneralSettings</>;
+};
 
 export default GeneralSettingsComponent;
-

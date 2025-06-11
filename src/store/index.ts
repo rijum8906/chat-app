@@ -4,18 +4,20 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authReducer from '@/features/auth/slice/authSlice';
 import alertReducer from '@/features/alert/slice/alertSlice';
+import themeReducer from '@/features/theme/slice/themeSlice';
 
 // Root reducer where all reducers will be combined
 const rootReducer = combineReducers({
   auth: authReducer,
   alert: alertReducer,
+  theme: themeReducer,
 });
 
 // setup storage for reducers.  Whitelist should specify which reducers to persist.
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['auth', 'theme'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
