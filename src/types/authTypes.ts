@@ -1,68 +1,53 @@
+// User Realted Interfaces
 export interface User {
   sub: string;
   email: string;
-  roles: string[];
   username: string;
+  roles: string[];
   profile: {
     displayName: string;
     avatarURL: string;
   };
 }
 
-export type Method = 'google' | 'password';
-
-export interface AuthState {
-  isLoading: boolean;
-  user: User | null;
-  token: string | null;
-  isError: boolean;
-  method: Method | null;
-  attempts: number;
+export interface UserInfo extends User {
+  
+  profile: User['profile'] & {
+    firstName: string;
+    lastName: string;
+    bio: string;
+  }
 }
 
-export interface AuthSuccessPayload {
-  user: User;
-  token: string;
-  method: Method;
+
+// Api Related Interfaces
+export interface SignInPayload {
+  username?: string;
+  email?: string;
+  password?: string;
 }
 
-export interface SigninPayload {
-  username: string | null;
-  email: string | null;
-  password: string;
-}
-
-export interface SignupPayload {
+export interface SignUpPayload {
   firstName: string;
   lastName: string;
-  username: string;
   email: string;
+  username: string;
   password: string;
-}
-
-export interface AuthContextType {
-  user: Record<string, any>;
-  token: string;
-  signOut: () => Promise<void>;
-  signInByPassword: (payload: SigninPayload, method: Method) => Promise<void>;
-  signUpByPassword: (payload: SignupPayload, method: Method) => Promise<void>;
-}
-
-export interface AuthResponse {
-  success: boolean;
-  data:
-    | {
-        token: string;
-        message: string;
-      }
-    | undefined;
-  error:
-    | {
-        message: string;
-      }
-    | undefined;
 }
 
 export interface GoogleAuthPayload {
   token: string;
+}
+
+export interface AuthResponse {
+  success: boolean;
+  message?: string;
+  data?: {
+    user: User;
+    token: string;
+  };
+  error?: {
+    message: string;
+    stack?: string;
+  }
 }

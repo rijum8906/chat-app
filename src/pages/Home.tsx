@@ -1,16 +1,9 @@
-import { useSidebar } from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
-
-const HomeComponent = () => {
-  const { toggleSidebar } = useSidebar();
-
-  const handleClick = () => toggleSidebar();
-
+const HomePage = () => {
   return (
-    <>
-      <Button onClick={handleClick}>toggleSidebar</Button>
-    </>
-  );
-};
+  <>
+    HomePage
+  </>
+  )
+}
 
-export default HomeComponent;
+export default HomePage;

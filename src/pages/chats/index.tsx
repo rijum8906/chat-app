@@ -1,5 +1,9 @@
-const IndexComponent = () => {
-  return <>Index</>;
-};
+const ChatIndexPage = () => {
+  return (
+  <>
+    ChatIndexPage
+  </>
+  )
+}
 
-export default IndexComponent;
+export default ChatIndexPage;

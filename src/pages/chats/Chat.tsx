@@ -1,5 +1,9 @@
-const Chat = () => {
-  return <>Chat</>;
-};
+const ChatPage = () => {
+  return (
+    <>
+      ChatPage
+    </>
+  )
+}
 
-export default Chat;
+export default ChatPage;

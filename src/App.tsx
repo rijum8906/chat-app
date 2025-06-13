@@ -1,25 +1,27 @@
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from '@/AppRoutes';
-import { AlertContainer } from '@/features/alert';
-import { useTheme } from '@/features/theme';
-import { useEffect } from 'react';
+import NotificationContainer from '@/features/notification/components/NotificationContainer';
+import { useNotification } from '@/features/notification/hooks/useNotification';
+import { Button } from '@/components/ui/button';
 
 function App() {
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    console.log(theme);
-    const root = window.document.documentElement;
-
-    root.classList.remove('light', 'dark');
-
-    root.classList.add(theme);
-  }, [theme]);
+  const { showNotification } = useNotification();
+  
+  const onClick = () => {
+    console.log('hi');
+    showNotification({
+      content: "jldi se to prchi na ho to Vet to the ground should be some options like this ",
+      link: "https://xhamster.com"
+    })
+  }
 
   return (
     <BrowserRouter>
+      <Button onClick={onClick}>
+        Click Me
+      </Button>
       <AppRoutes />
-      <AlertContainer />
+      <NotificationContainer />
     </BrowserRouter>
   );
 }

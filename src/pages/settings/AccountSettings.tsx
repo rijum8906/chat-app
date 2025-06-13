@@ -1,5 +1,9 @@
 const AccountSettingsComponent = () => {
-  return <>AccountSettings</>;
-};
+  return (
+  <>
+    AccountSettingsComponent
+  </>
+  )
+}
 
 export default AccountSettingsComponent;

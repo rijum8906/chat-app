@@ -1,5 +1,9 @@
-const ProfileComponent = () => {
-  return <>Profile</>;
-};
+const ProfilePage = () => {
+  return (
+  <>
+    ProfilePage
+  </>
+  )
+}
 
-export default ProfileComponent;
+export default ProfilePage;
