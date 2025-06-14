@@ -1,9 +1,5 @@
 const AboutPage = () => {
-  return (
-  <>
-    AboutPage
-  </>
-  )
-}
+  return <>AboutPage</>;
+};
 
 export default AboutPage;

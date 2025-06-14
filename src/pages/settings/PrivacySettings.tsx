@@ -1,9 +1,5 @@
 const PrivacySettingsComponent = () => {
-  return (
-  <>
-    PrivacySettingsComponent
-  </>
-  )
-}
+  return <>PrivacySettingsComponent</>;
+};
 
 export default PrivacySettingsComponent;

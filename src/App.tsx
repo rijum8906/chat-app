@@ -1,25 +1,27 @@
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from '@/AppRoutes';
 import NotificationContainer from '@/features/notification/components/NotificationContainer';
-import { useNotification } from '@/features/notification/hooks/useNotification';
-import { Button } from '@/components/ui/button';
+import { useEffect } from 'react';
+import { useTheme } from '@/features/theme/hooks/useTheme';
 
 function App() {
-  const { showNotification } = useNotification();
-  
-  const onClick = () => {
-    console.log('hi');
-    showNotification({
-      content: "jldi se to prchi na ho to Vet to the ground should be some options like this ",
-      link: "https://xhamster.com"
-    })
-  }
+  const { theme } = useTheme();
+
+  // Set Themes
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove('light', 'dark');
+
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return root.classList.add(systemTheme);
+    }
+
+    root.classList.add(theme);
+  }, [theme]);
 
   return (
     <BrowserRouter>
-      <Button onClick={onClick}>
-        Click Me
-      </Button>
       <AppRoutes />
       <NotificationContainer />
     </BrowserRouter>

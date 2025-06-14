@@ -1,9 +1,5 @@
 const NotificationSettingsComponent = () => {
-  return (
-  <>
-    NotificationSettingsComponent
-  </>
-  )
-}
+  return <>NotificationSettingsComponent</>;
+};
 
 export default NotificationSettingsComponent;

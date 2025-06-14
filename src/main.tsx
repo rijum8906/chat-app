@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <PersistGate loading={null} persistor={persistor}>
       <Provider store={store}>
-          <App />
+        <App />
       </Provider>
     </PersistGate>
   </QueryClientProvider>

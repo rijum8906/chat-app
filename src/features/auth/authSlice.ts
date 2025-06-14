@@ -44,12 +44,19 @@ const userSlice = createSlice({
       state.isError = true;
       state.isAuthenticated = false;
       state.isLoading = false;
-    }
+    },
+    clearAuth: (state) => {
+      state.isError = false;
+      state.isAuthenticated = false;
+      state.isLoading = false;
+      state.token = null;
+      state.user = null;
+    },
   },
 });
 
 // 4. Export actions
-export const { authSuccess, authFailure, startLoading } = userSlice.actions;
+export const { authSuccess, authFailure, startLoading, clearAuth } = userSlice.actions;
 
 // 5. Export reducer
 export default userSlice.reducer;

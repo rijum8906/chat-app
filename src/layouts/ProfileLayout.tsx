@@ -4,10 +4,10 @@ import Loader from '@/components/layout/Loader';
 
 const ProfileLayout = () => {
   return (
-  <Suspense fallback={<Loader />}>
-    <Outlet />
-  </Suspense>
-  )
-}
+    <Suspense fallback={<Loader />}>
+      <Outlet />
+    </Suspense>
+  );
+};
 
 export default ProfileLayout;

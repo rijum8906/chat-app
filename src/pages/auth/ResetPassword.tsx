@@ -1,9 +1,5 @@
 const ResetPasseordPage = () => {
-  return (
-  <>
-    ResetPasseordPage
-  </>
-  )
-}
+  return <>ResetPasseordPage</>;
+};
 
 export default ResetPasseordPage;

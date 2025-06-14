@@ -1,9 +1,5 @@
 const VerifyEmailPage = () => {
-  return (
-    <>
-      VerifyEmailPage
-    </>
-  )
-}
+  return <>VerifyEmailPage</>;
+};
 
 export default VerifyEmailPage;

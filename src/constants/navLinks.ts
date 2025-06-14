@@ -1,10 +1,19 @@
+import { type IconType } from 'react-icons';
 import { MdHome } from 'react-icons/md';
 import { MdDashboard } from 'react-icons/md'; // Import Dashboard icon
 import { MdLogin } from 'react-icons/md'; // Import Login icon
 import { MdSettings } from 'react-icons/md'; // Import Settings icon
 import { MdInfo } from 'react-icons/md'; //Import Info icon
 
-export const navLinks = [
+export interface NavLink {
+  path: string;
+  label: string;
+  icon: IconType;
+  registeredOnly?: boolean;
+  unRegisteredOnly?: boolean;
+}
+
+export const navLinks: NavLink[] = [
   {
     path: '/',
     label: 'Home',
@@ -17,10 +26,10 @@ export const navLinks = [
     registeredOnly: true,
   },
   {
-    path: '/signin',
-    label: 'Signin',
+    path: '/auth/signin',
+    label: 'Sign in',
     icon: MdLogin, // Assign Login icon
-    unRegisterdOnly: true,
+    unRegisteredOnly: true,
   },
   {
     path: '/settings',

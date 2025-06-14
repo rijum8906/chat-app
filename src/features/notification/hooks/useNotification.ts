@@ -1,8 +1,15 @@
 // src/features/notification/hooks/useNotification.ts
 
 import { useAppSelector, useAppDispatch } from '@/store';
-import type { Notification } from './../notificationSlice';
 import { addNotification, removeNotification, removeAllNotifications } from './../notificationSlice';
+
+interface NotificationPayload {
+  header?: string;
+  content: string;
+  link?: string;
+  autoClose?: number;
+  dismibble?: boolean;
+}
 
 export const useNotification = () => {
   const dispatch = useAppDispatch();
@@ -11,7 +18,7 @@ export const useNotification = () => {
   return {
     notifications,
 
-    showNotification: (notification: Omit<Notification, 'id'>) => {
+    showNotification: (notification: NotificationPayload) => {
       dispatch(addNotification(notification));
     },
 

@@ -1,9 +1,5 @@
 const ChatSettingsPage = () => {
-  return (
-    <>
-      ChatSettingsPage
-    </>
-  )
-}
+  return <>ChatSettingsPage</>;
+};
 
 export default ChatSettingsPage;

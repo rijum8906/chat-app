@@ -1,9 +1,5 @@
 const ContactPage = () => {
-  return (
-  <>
-    ContactPage
-  </>
-  )
-}
+  return <>ContactPage</>;
+};
 
 export default ContactPage;

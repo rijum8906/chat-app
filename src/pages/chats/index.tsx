@@ -1,9 +1,5 @@
 const ChatIndexPage = () => {
-  return (
-  <>
-    ChatIndexPage
-  </>
-  )
-}
+  return <>ChatIndexPage</>;
+};
 
 export default ChatIndexPage;

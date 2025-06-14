@@ -4,10 +4,10 @@ import Loader from '@/components/layout/Loader';
 
 const SettingsLayout = () => {
   return (
-  <Suspense fallback={<Loader />}>
-    <Outlet />
-  </Suspense>
-  )
-}
+    <Suspense fallback={<Loader />}>
+      <Outlet />
+    </Suspense>
+  );
+};
 
 export default SettingsLayout;

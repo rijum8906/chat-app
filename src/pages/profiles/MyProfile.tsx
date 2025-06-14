@@ -1,9 +1,5 @@
 const MyProfilePage = () => {
-  return (
-  <>
-    MyProfilePage
-  </>
-  )
-}
+  return <>MyProfilePage</>;
+};
 
 export default MyProfilePage;

@@ -30,14 +30,8 @@ const NotificationContainer = () => {
             exit={{ opacity: 0, x: 50 }}
             className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 shadow-lg rounded-lg p-4 w-[300px]"
           >
-            {notification.header && (
-              <h3 className="text-lg font-semibold mb-1">
-                {notification.header}
-              </h3>
-            )}
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              {notification.content}
-            </p>
+            {notification.header && <h3 className="text-lg font-semibold mb-1">{notification.header}</h3>}
+            <p className="text-sm text-gray-700 dark:text-gray-300">{notification.content}</p>
 
             {notification.link && (
               <a

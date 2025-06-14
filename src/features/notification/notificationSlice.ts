@@ -27,19 +27,14 @@ const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    addNotification: (
-      state,
-      action: PayloadAction<Omit<Notification, 'id'>>
-    ) => {
+    addNotification: (state, action: PayloadAction<Omit<Notification, 'id'>>) => {
       state.notifications.push({
         id: uid(),
         ...action.payload,
       });
     },
     removeNotification: (state, action: PayloadAction<string>) => {
-      state.notifications = state.notifications.filter(
-        (n) => n.id !== action.payload
-      );
+      state.notifications = state.notifications.filter((n) => n.id !== action.payload);
     },
     removeAllNotifications: (state) => {
       state.notifications = [];
@@ -48,11 +43,7 @@ const notificationSlice = createSlice({
 });
 
 // 5. Export actions
-export const {
-  addNotification,
-  removeNotification,
-  removeAllNotifications,
-} = notificationSlice.actions;
+export const { addNotification, removeNotification, removeAllNotifications } = notificationSlice.actions;
 
 // 6. Export reducer
 export default notificationSlice.reducer;
